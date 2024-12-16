@@ -15,7 +15,7 @@
               <a class="header__button-link" href="mailto:plenochnieokna@mail.ru">plenochnieokna@mail.ru</a>
             </div>
             <div class="header__logo">
-              <NuxtLink to="/"><img src="~/assets/svg/logo.png" alt="Logo" /></NuxtLink>
+              <NuxtLink to="/"><img src="~/assets/svg/logo.svg" alt="Logo" /></NuxtLink>
             </div>
             <div class="block-text">
               <p class="text">Работаем ежедневно</p>
@@ -54,7 +54,7 @@
               </div>
             </nav>
             <div class="header__logo">
-              <NuxtLink to="/"><img src="../assets/svg/logo.png" alt="Logo" /></NuxtLink>
+              <NuxtLink to="/"><img src="../assets/svg/logo.svg" alt="Logo" /></NuxtLink>
             </div>
             <NuxtLink
               class="header__button"

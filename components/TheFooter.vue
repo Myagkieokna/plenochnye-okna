@@ -5,7 +5,7 @@
         <div class="footer__top">
           <div class="footer__left-column">
             <div class="footer__logo">
-              <a href="#"><img style="width: 180px; height: 70px;" src="~/assets/svg/logo.png" alt="Logo" /></a>
+              <a href="#"><img style="width: 180px; height: 70px;" src="~/assets/svg/logo.svg" alt="Logo" /></a>
             </div>
           </div>
           <div class="footer__right-column">
