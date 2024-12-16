@@ -170,6 +170,11 @@ body._lock .floating-btn {
     height: 4.5rem;
     width: 4.5rem;
   }
+
+  .floating-btn-item.tg-btn {
+    height: 4.5rem;
+    width: 4.5rem;
+  }
 }
 
 /* Анимация для появления кнопок */
