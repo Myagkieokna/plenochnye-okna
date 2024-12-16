@@ -54,7 +54,7 @@
               </div>
             </nav>
             <div class="header__logo">
-              <NuxtLink to="/"><img src="../assets/svg/logo.svg" alt="Logo" /></NuxtLink>
+              <NuxtLink to="/"><img src="../assets/svg/logo.png" alt="Logo" /></NuxtLink>
             </div>
             <NuxtLink
               class="header__button"

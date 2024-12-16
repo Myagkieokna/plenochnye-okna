@@ -6,6 +6,7 @@
   "exclude": [
     "/_nuxt/*",
     "/",
+    "/_payload.json",
     "/base.css",
     "/favicon.ico",
     "/fonts.css",
@@ -61,6 +62,7 @@
     "/img/icons8-solnce-96.png",
     "/img/icons8-sum-96.png",
     "/img/icons8-sun-96.png",
+    "/img/icons8-telegram-logo-67.png",
     "/img/icons8-tools-96.png",
     "/img/icons8-wallet-96.png",
     "/img/icons8-whatsapp-64.png",
@@ -100,8 +102,6 @@
     "/svg/plus.svg",
     "/img/gallery/gallery1.jpeg",
     "/img/gallery/gallery10.jpeg",
-    "/img/gallery/gallery11.jpeg",
-    "/img/gallery/gallery12.jpeg",
-    "/img/gallery/gallery13.jpeg"
+    "/img/gallery/gallery11.jpeg"
   ]
 }
