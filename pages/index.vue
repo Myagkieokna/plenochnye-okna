@@ -19,14 +19,6 @@ const containerRef = ref(null)
 const swiper = useSwiper(containerRef)
 
 const imageLinks: string[] = [
-	// ID: gallery1
-  "https://picloud.cc/images/5c5c7cdd7f251dffa9493f46fdbbd868.jpg",
-	// ID: gallery1
-  "https://picloud.cc/images/5c5c7cdd7f251dffa9493f46fdbbd868.jpg",
-	// ID: gallery1
-  "https://picloud.cc/images/5c5c7cdd7f251dffa9493f46fdbbd868.jpg",
-	// ID: gallery1
-  "https://picloud.cc/images/5c5c7cdd7f251dffa9493f46fdbbd868.jpg",
   // ID: gallery1
   "https://picloud.cc/images/5c5c7cdd7f251dffa9493f46fdbbd868.jpg",
   // ID: gallery2
