@@ -57,7 +57,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "Мягкие окна и пленочные окна из ПВХ | Утепление и теплоизоляция для вашего дома",
+      title: "Мягкие окна из ПВХ | Утепление и теплоизоляция для вашего дома",
       link: [
         // { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         { rel: "canonical", href: "https://plenochnieokna.com" },
