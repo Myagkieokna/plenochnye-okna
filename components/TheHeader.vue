@@ -40,7 +40,7 @@
                 </li>
               </ul>
               <div class="header__buttons">
-                <div class="block-text" style="display: flex; gap: 1.5rem">
+                <div class="block-text" style="display: flex; gap: 0.5rem; flex-direction: column;">
                   <a class="header__button-link"                 
                     href="tel:+79661266606"
                     target="_blank"
@@ -196,7 +196,7 @@ const scrollToElement = (target: string) => {
       top: 0;
       left: 0;
       z-index: 5;
-      padding: 90px 0 0 0;
+      padding: 170px 0 0 0;
       flex-direction: column;
       justify-content: space-between;
       overflow: auto;
@@ -211,7 +211,7 @@ const scrollToElement = (target: string) => {
       content: "";
       width: 100%;
       height: 1px;
-      top: 9.2rem;
+      top: 160px;
       left: 0;
     }
 

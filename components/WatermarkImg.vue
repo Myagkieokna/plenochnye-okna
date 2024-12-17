@@ -1,40 +1,41 @@
 <template>
-    <!-- Skeleton loader while images are loading -->
-    <div v-if="loading" class="watermark-else">
-      <div v-for="index in skeletonCount" :key="index">
-        <USkeleton class="w-[100%] h-[22rem] rounded-xl" />
-      </div>
+  <!-- Skeleton loader while images are loading -->
+  <div v-if="loading" class="watermark-else">
+    <div v-for="index in skeletonCount" :key="index">
+      <USkeleton class="w-[100%] h-[22rem] rounded-xl" />
     </div>
+  </div>
 
-    <!-- Processed images -->
-    <div v-else class="watermark-else">
-      <div v-for="(image, index) in processedImages" :key="index">
-        <NuxtImg
-          :src="image"
-          alt="Изображение с водяным знаком"
-          width="100%"
-          height="auto"
-          class="watermark-img"
-          quality="80"
-          format="webp"
-          loading="lazy"
-          @click="openModal(image)"
-        />
-      </div>
+  <!-- Processed images -->
+  <div v-else class="watermark-else">
+    <div v-for="(image, index) in processedImages" :key="index">
+      <NuxtImg
+        :src="image"
+        alt="Изображение с водяным знаком"
+        width="100%"
+        height="auto"
+        class="watermark-img"
+        quality="80"
+        format="webp"
+        loading="lazy"
+        @click="openModal(image)"
+      />
     </div>
+  </div>
 
-    <!-- Modal for full-screen view -->
-    <div v-if="isModalOpen" class="modal" @click="closeModal">
-      <NuxtImg :src="currentImage" alt="Изображение в полноэкранном режиме" />
-    </div>
+  <!-- Modal for full-screen view -->
+  <div v-if="isModalOpen" class="modal" @click="closeModal">
+    <NuxtImg :src="currentImage" alt="Изображение в полноэкранном режиме" />
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch, onMounted, type PropType } from "vue";
+import logoSrc from '~/assets/svg/logo.svg';
+
 
 interface ImageWithWatermark {
   src: string;
-  watermark: string;
 }
 
 const props = defineProps({
@@ -49,9 +50,29 @@ const isModalOpen = ref(false);
 const currentImage = ref("");
 const loading = ref(true);
 const skeletonCount = 16;
+const logo = ref<HTMLImageElement | null>(null);
+
+const loadLogo = async (logoSrc: string): Promise<HTMLImageElement | null> => {
+  console.log("Загрузка логотипа:", logoSrc); // Проверяем путь
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = logoSrc;
+
+    img.onload = () => {
+      console.log("Логотип загружен успешно:", img);
+      resolve(img);
+    };
+    img.onerror = () => {
+      console.error("Не удалось загрузить логотип:", logoSrc);
+      resolve(null);
+    };
+  });
+};
+
 
 const applyWatermark = async (image: ImageWithWatermark): Promise<string> => {
-  return new Promise((resolve) => {
+  return new Promise(async (resolve) => {
     if (typeof window === "undefined") {
       return resolve("");
     }
@@ -64,13 +85,27 @@ const applyWatermark = async (image: ImageWithWatermark): Promise<string> => {
     img.crossOrigin = "anonymous";
     img.src = image.src;
 
-    img.onload = () => {
+    img.onload = async () => {
       canvas.width = img.width;
       canvas.height = img.height;
+
+      // Draw original image
       ctx.drawImage(img, 0, 0);
-      ctx.font = "20px Arial";
-      ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-      ctx.fillText(image.watermark, 10, 30);
+
+      // Draw watermark logo if loaded
+      if (!logo.value) {
+        console.error("Logo not loaded");
+        return resolve("");
+      }
+
+      const logoWidth = canvas.width * 0.2; // Logo width 20% of image width
+      const logoHeight = (logo.value.height / logo.value.width) * logoWidth;
+      const logoX = canvas.width - logoWidth - 10; // 10px margin from right edge
+      const logoY = canvas.height - logoHeight - 10; // 10px margin from bottom edge
+
+      ctx.globalAlpha = 0.7; // Logo transparency
+      ctx.drawImage(logo.value, logoX, logoY, logoWidth, logoHeight);
+
       resolve(canvas.toDataURL("image/png"));
     };
 
@@ -98,10 +133,12 @@ const closeModal = () => {
 
 watch(() => props.images, processImages, { immediate: true });
 
-onMounted(() => {
-  processImages();
+onMounted(async () => {
+  logo.value = await loadLogo(logoSrc); // Path to the watermark logo
+  await processImages(); // Process images after logo is loaded
 });
 </script>
+
 
 <style scoped>
 .watermark-img {

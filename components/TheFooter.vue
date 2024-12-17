@@ -5,7 +5,7 @@
         <div class="footer__top">
           <div class="footer__left-column">
             <div class="footer__logo">
-              <a href="#"><img style="width: 180px; height: 70px;" src="~/assets/svg/logo.svg" alt="Logo" /></a>
+              <a href="#"><img style="width: 146px; height: 136px;" src="~/assets/svg/logo.svg" alt="Logo" /></a>
             </div>
           </div>
           <div class="footer__right-column">
@@ -25,6 +25,9 @@
         <div class="footer__bottom">
           <p class="footer__text">
               Все права защищены © 2016 – 2024 Цены на сайте для ознакомления — не являются публичной офертой, определяемой положениями статьи 437 Гражданского кодекса Российской Федерации. Компания оставляет за собой права без уведомления пользователя изменять цены на сайте
+            </p>
+            <p class="footer__text" style="font-size: 1.5rem;">
+             Разработано <a href="https://vk.com/chernyshevskiii" target="_blank">https://vk.com/chernyshevskiii</a>
             </p>
           <!-- <div class="footer__bottom-left">
             <ul class="footer__bottom-list">
@@ -225,6 +228,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: column;
   }
 
   &__bottom-left {

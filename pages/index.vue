@@ -56,6 +56,11 @@ interface ContactInfo {
 
 
 const currentStep = ref(1);
+const loading = ref(true);
+const skeletonCount = 6; // Количество скелетонов для загрузки
+const processedImages = ref<string[]>([]); // Здесь будут ссылки на изображения
+const isModalOpen = ref(false);
+const currentImage = ref<string | null>(null);
 
 const answers = ref<Answer>({
   area: 1,
@@ -405,91 +410,213 @@ const changeTab = (tabName: string) => {
   selectedTab.value = tabName;
 };
 
-interface ImageWithWatermark {
-  src: string;
-  watermark: string;
-}
+const imageLinks: string[] = [
+  // ID: gallery1
+  "https://picloud.cc/images/5c5c7cdd7f251dffa9493f46fdbbd868.jpg",
+  // ID: gallery2
+  "https://picloud.cc/images/4c2d6c4b1739e6dec1d61023c9a9d6e1.jpg",
+  // ID: gallery3
+  "https://picloud.cc/images/4db797d29316f73b9c52a3868ad2d9b9.jpg",
+  // ID: gallery4
+  "https://picloud.cc/images/058d441ccbee12fe2b798ac7c2a56739.jpg",
+  // ID: gallery5
+  "https://picloud.cc/images/3b24527518ad77f9e3bc87903b06208f.jpg",
+  // ID: gallery6
+  "https://picloud.cc/images/854bcf27af9820ce96de2700b33f6968.jpg",
+  // ID: gallery7
+  "https://picloud.cc/images/7bb51b13644b2ff54965533e82ad974b.jpg",
+  // ID: gallery8
+  "https://picloud.cc/images/9b7e0b37b66e1ed4ac250884e645b4d5.jpg",
+  // ID: gallery9
+  "https://picloud.cc/images/248be3f0d411aa0c51d92e4b13d08776.jpg",
+  // ID: gallery10
+  "https://picloud.cc/images/c63489b1626fce6a4d2ca629a7cd8e0b.jpg",
+  // ID: gallery11
+  "https://picloud.cc/images/fbf2ab1792b5b4e940dc90bb8797b46f.jpg",
+  // ID: gallery12
+  "https://picloud.cc/images/cefb4eb14de4612cb5f8356e5028e4fa.jpg",
+  // ID: gallery13
+  "https://picloud.cc/images/b34f3ec3ff57d84c1b9d0a18dcbe6444.jpg",
+  // ID: gallery14
+  "https://picloud.cc/images/946313d2989b4efc4cd3d363ac98b72c.jpg",
+  // ID: gallery15
+  "https://picloud.cc/images/5be970281a7aaa0b808f3d72fedb1b56.jpg",
+  // ID: gallery16
+  "https://picloud.cc/images/b9721e35c2a899c7f6f02eff24226d26.jpg",
+  // ID: gallery17
+  "https://picloud.cc/images/8fb69f041bb7ca03ee8b652f1eba1329.jpg",
+  // ID: gallery18
+  "https://picloud.cc/images/c92159fc565a2eb0124f36767aaaeac4.jpg",
+  // ID: gallery19
+  "https://picloud.cc/images/defdfca0ab3b14df4f3046796aa3229a.jpg",
+  // ID: gallery20
+  "https://picloud.cc/images/305fe215a0199197b8e32110eaf3aa07.jpg",
+  // ID: gallery21
+  "https://picloud.cc/images/64dc7cefb04ba0101eb665a0fa26826b.jpg",
+  // ID: gallery22
+  "https://picloud.cc/images/2adc7020611333c201d2db5c6c8d9ad9.jpg",
+  // ID: gallery23
+  "https://picloud.cc/images/1c4dd57ae82df930063f71d08e1acbea.jpg",
+  // ID: gallery24
+  "https://picloud.cc/images/11ad013ad492574cc71706e638e6775b.jpg",
+  // ID: gallery25
+  "https://picloud.cc/images/43161f4c5546d54a02aaee9754e089a8.jpg",
+  // ID: gallery26
+  "https://picloud.cc/images/640ebb18a667f735325fd0c9f05d123f.jpg",
+  // ID: gallery27
+  "https://picloud.cc/images/0fcf856c69e0540ca3c0d28988a4829a.jpg",
+  // ID: gallery28
+  "https://picloud.cc/images/adc18327937b1c2d4543c48068ccd3a0.jpg",
+  // ID: gallery29
+  "https://picloud.cc/images/f5f2fe011c8e6d38ea81b8625333695f.jpg",
+  // ID: gallery30
+  "https://picloud.cc/images/b8880abfb78a5ed0eaaa93cea8543d17.jpg",
+  // ID: gallery31
+  "https://picloud.cc/images/c289976f64e7d0dea3db41b1ac11fe0e.jpg",
+  // ID: gallery32
+  "https://picloud.cc/images/51c4e48f59ccfee4b7050c84ee1731e2.jpg",
+  // ID: gallery33
+  "https://picloud.cc/images/b102471eb966feb628f834b4682680f9.jpg",
+  // ID: gallery34
+  "https://picloud.cc/images/fa4511b202c6d06154f88e4260d1b5e6.jpg",
+  // ID: gallery35
+  "https://picloud.cc/images/25bdea69bb205bb292c53d71ff2e786b.jpg",
+  // ID: gallery36
+  "https://picloud.cc/images/4619617cb1f1af12a38a058e40a4f2fd.jpg",
+  // ID: gallery37
+  "https://picloud.cc/images/f0ef0e4dfbe2489897fe062a397fb436.jpg",
+  // ID: gallery38
+  "https://picloud.cc/images/a2100106ab3f0acdde0db6e63fa605ec.jpg",
+  // ID: gallery39
+  "https://picloud.cc/images/892a1220ca48bee2c2a05812428d984e.jpg",
+  // ID: gallery40
+  "https://picloud.cc/images/ed2e09fca8981c318fc9f4e1c15babe4.jpg",
+  // ID: gallery41
+  "https://picloud.cc/images/82b54a62a23612024add67c1d784db0b.jpg",
+  // ID: gallery42
+  "https://picloud.cc/images/478fad929879a5d735aca6559576833a.jpg",
+  // ID: gallery43
+  "https://picloud.cc/images/d60a2901a25759868a22d2372c40dce8.jpg",
+  // ID: gallery44
+  "https://picloud.cc/images/439137dde9ae9b9bf9125049294ebf95.jpg",
+  // ID: gallery45
+  "https://picloud.cc/images/c65666635d3cdd0865ce86cf108f5e6e.jpg",
+  // ID: gallery46
+  "https://picloud.cc/images/4b290e3b340927df07c7bd4ba1bd6718.jpg",
+  // ID: gallery47
+  "https://picloud.cc/images/271ee39e166aee22676b7c8fbda79b03.jpg",
+  // ID: gallery48
+  "https://picloud.cc/images/d106109fa3ae546b5eaa8505f745ab57.jpg",
+  // ID: gallery49
+  "https://picloud.cc/images/d6c8b4186524046ae4b77658aa9b20a1.jpg",
+  // ID: gallery50
+  "https://picloud.cc/images/03858a5fbba7b708ce4bc68fcd239771.jpg",
+  // ID: gallery51
+  "https://picloud.cc/images/cde585dd30e41263ba149ad1999f14de.jpg",
+  // ID: gallery52
+  "https://picloud.cc/images/4c86766c8c6856f2ab917bcbfd6e7e99.jpg",
+];
 
-const images = ref<ImageWithWatermark[]>([
-  { src: '/img/gallery/gallery1.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery2.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery3.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery4.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery5.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery6.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery7.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery8.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery9.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery10.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery11.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery12.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery13.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery14.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery15.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery16.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery17.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery18.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery19.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery20.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery21.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery22.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery23.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery24.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery25.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery26.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery27.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery28.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery29.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery30.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery31.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery32.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery33.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery34.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery35.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery36.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery37.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery38.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery39.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery40.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery41.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery42.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery43.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery44.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery45.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery46.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery47.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery48.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery49.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery50.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery51.jpeg', watermark: '/img/gallery/logo.svg' },
-  { src: '/img/gallery/gallery52.jpeg', watermark: '/img/gallery/logo.svg' },
-]);
 
-// Фильтруем изображения, проверяя, существуют ли они
-const validImages = ref<ImageWithWatermark[]>([]);
+// Имитация загрузки изображений
+setTimeout(() => {
+  processedImages.value = imageLinks;
+  loading.value = false;
+}, 2000); // Условный таймаут для демонстрации
 
-const checkImagesExistence = async () => {
-  for (const image of images.value) {
-    try {
-      const img = new Image();
-      img.src = image.src;
-      img.onload = () => {
-        validImages.value.push(image); // Добавляем изображение, если оно успешно загружено
-      };
-      img.onerror = () => {
-        // Если изображение не существует или не может быть загружено, просто пропускаем
-        console.log(`Image not found: ${image.src}`);
-      };
-    } catch (error) {
-      console.error(`Error loading image: ${image.src}`, error);
-    }
-  }
+const openModal = (image: string) => {
+  currentImage.value = image;
+  isModalOpen.value = true;
 };
 
-// Вызываем проверку при монтировании
-onMounted(() => {
-  checkImagesExistence();
-});
+const closeModal = () => {
+  currentImage.value = null;
+  isModalOpen.value = false;
+};
+// interface ImageWithWatermark {
+//   src: string;
+// }
+
+// const images = ref<ImageWithWatermark[]>([
+//   { src: '/img/gallery/gallery1.jpeg',},
+//   { src: '/img/gallery/gallery2.jpeg',},
+//   { src: '/img/gallery/gallery3.jpeg'},
+//   { src: '/img/gallery/gallery4.jpeg'},
+//   { src: '/img/gallery/gallery5.jpeg'},
+//   { src: '/img/gallery/gallery6.jpeg'},
+//   { src: '/img/gallery/gallery7.jpeg'},
+//   { src: '/img/gallery/gallery8.jpeg'},
+//   { src: '/img/gallery/gallery9.jpeg'},
+//   { src: '/img/gallery/gallery10.jpeg'},
+//   { src: '/img/gallery/gallery11.jpeg'},
+//   { src: '/img/gallery/gallery12.jpeg'},
+//   { src: '/img/gallery/gallery13.jpeg'},
+//   { src: '/img/gallery/gallery14.jpeg'},
+//   { src: '/img/gallery/gallery15.jpeg'},
+//   { src: '/img/gallery/gallery16.jpeg'},
+//   { src: '/img/gallery/gallery17.jpeg'},
+//   { src: '/img/gallery/gallery18.jpeg'},
+//   { src: '/img/gallery/gallery19.jpeg'},
+//   { src: '/img/gallery/gallery20.jpeg'},
+//   { src: '/img/gallery/gallery21.jpeg'},
+//   { src: '/img/gallery/gallery22.jpeg'},
+//   { src: '/img/gallery/gallery23.jpeg'},
+//   { src: '/img/gallery/gallery24.jpeg'},
+//   { src: '/img/gallery/gallery25.jpeg'},
+//   { src: '/img/gallery/gallery26.jpeg'},
+//   { src: '/img/gallery/gallery27.jpeg'},
+//   { src: '/img/gallery/gallery28.jpeg'},
+//   { src: '/img/gallery/gallery29.jpeg'},
+//   { src: '/img/gallery/gallery30.jpeg'},
+//   { src: '/img/gallery/gallery31.jpeg'},
+//   { src: '/img/gallery/gallery32.jpeg'},
+//   { src: '/img/gallery/gallery33.jpeg'},
+//   { src: '/img/gallery/gallery34.jpeg'},
+//   { src: '/img/gallery/gallery35.jpeg'},
+//   { src: '/img/gallery/gallery36.jpeg'},
+//   { src: '/img/gallery/gallery37.jpeg'},
+//   { src: '/img/gallery/gallery38.jpeg'},
+//   { src: '/img/gallery/gallery39.jpeg'},
+//   { src: '/img/gallery/gallery40.jpeg'},
+//   { src: '/img/gallery/gallery41.jpeg'},
+//   { src: '/img/gallery/gallery42.jpeg'},
+//   { src: '/img/gallery/gallery43.jpeg'},
+//   { src: '/img/gallery/gallery44.jpeg'},
+//   { src: '/img/gallery/gallery45.jpeg'},
+//   { src: '/img/gallery/gallery46.jpeg'},
+//   { src: '/img/gallery/gallery47.jpeg'},
+//   { src: '/img/gallery/gallery48.jpeg'},
+//   { src: '/img/gallery/gallery49.jpeg'},
+//   { src: '/img/gallery/gallery50.jpeg'},
+//   { src: '/img/gallery/gallery51.jpeg'},
+//   { src: '/img/gallery/gallery52.jpeg'},
+// ]);
+
+// // Фильтруем изображения, проверяя, существуют ли они
+// const validImages = ref<ImageWithWatermark[]>([]);
+
+// const checkImagesExistence = async () => {
+//   for (const image of images.value) {
+//     try {
+//       const img = new Image();
+//       img.src = image.src;
+//       img.onload = () => {
+//         validImages.value.push(image); // Добавляем изображение, если оно успешно загружено
+//       };
+//       img.onerror = () => {
+//         // Если изображение не существует или не может быть загружено, просто пропускаем
+//         console.log(`Image not found: ${image.src}`);
+//       };
+//     } catch (error) {
+//       console.error(`Error loading image: ${image.src}`, error);
+//     }
+//   }
+// };
+
+// // Вызываем проверку при монтировании
+// onMounted(() => {
+//   checkImagesExistence();
+// });
 
 // const images = ref<ImageWithWatermark[]>([]);  // Объявляем тип для images
 
@@ -1266,9 +1393,33 @@ import { useNotifications } from '~/composables/useNotifications';
     <div class="container">
       <div class="watermark__inner">
         <h2 class="watermark__title">Наши <span class="orange">работы</span></h2>
-        <div class="watermark__images">
+        <!-- Skeleton loader while images are loading -->
+        <div v-if="loading" class="watermark-else">
+          <div v-for="index in skeletonCount" :key="index">
+            <USkeleton class="w-[100%] h-[22rem] rounded-xl" />
+          </div>
+        </div>
 
-          <WatermarkImg :images="images" />
+        <!-- Processed images -->
+        <div v-else class="watermark-else">
+          <div v-for="(image, index) in processedImages" :key="index">
+            <NuxtImg
+              :src="image"
+              alt="Изображение с водяным знаком"
+              width="100%"
+              height="auto"
+              class="watermark-img"
+              quality="80"
+              format="webp"
+              loading="lazy"
+              @click="openModal(image)"
+            />
+          </div>
+        </div>
+
+        <!-- Modal for full-screen view -->
+        <div v-if="isModalOpen" class="modal" @click="closeModal">
+          <NuxtImg :src="currentImage || ''" alt="Изображение в полноэкранном режиме" />
         </div>
       </div>
     </div>
@@ -1293,6 +1444,48 @@ import { useNotifications } from '~/composables/useNotifications';
 
 <style lang="scss" scoped>
 
+.watermark-img {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Обеспечиваем, чтобы изображения заполнили ячейку грида без искажения */
+  object-position: center; /* Центрируем изображение в ячейке */
+}
+
+.watermark-else {
+  display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem; /* Устанавливаем gap на 1rem */
+      padding: 0; /* Убираем внутренние отступы */
+}
+
+.watermark-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
 
 .tabs {
   margin-bottom: 14rem;
