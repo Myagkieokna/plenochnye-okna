@@ -133,7 +133,7 @@
     transition: all 0.2s;
 
     &>a {
-      color: #b0b0b0;
+      color: #e0e0e0;
       transition: all 0.2s;
       &:hover {
         color: #fff;
