@@ -126,7 +126,7 @@ const imageLinks: string[] = [
 ];
 
 const loading = ref(true);
-const skeletonCount = 6; // Количество скелетонов для загрузки
+const skeletonCount = 16; // Количество скелетонов для загрузки
 const processedImages = ref<string[]>([]); // Здесь будут ссылки на изображения
 const isModalOpen = ref(false);
 const currentImage = ref<string | null>(null);
@@ -633,6 +633,29 @@ const changeTab = (tabName: string) => {
 //   fetchImages();
 // });
 import { useNotifications } from '~/composables/useNotifications';
+
+definePageMeta({
+  title: 'Мягкие окна из ПВХ | Утепление и теплоизоляция для вашего дома',
+  meta: [
+    { name: 'description', content: 'Мягкие окна и пленочные окна из ПВХ - отличный выбор для утепления и защиты вашего дома. Узнайте о преимуществах и особенностях ПВХ окон для дачи и террас.' },
+    { name: 'keywords', content: 'мягкие окна, пленочные окна, окна из ПВХ, теплоизоляция, пластиковые окна, окна для дачи, окна для террасы, утепление окон, ПВХ окна' },
+    { name: 'robots', content: 'index, follow' },
+    { name: 'author', content: 'Мягкие окна' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
+    { name: 'og:title', content: 'Мягкие окна и пленочные окна из ПВХ | Утепление и теплоизоляция для вашего дома' },
+    { name: 'og:description', content: 'Мягкие окна и пленочные окна из ПВХ - лучший выбор для утепления вашего дома и дачи. Преимущества теплоизоляции, долговечности и легкости в обслуживании.' },
+    { name: 'og:image', content: 'https://picloud.cc/images/9b7e0b37b66e1ed4ac250884e645b4d5.jpg' },
+    { name: 'og:url', content: 'https://plenochnieokna.com' },
+    { name: 'og:type', content: 'website' },
+    { name: 'og:locale', content: 'ru_RU' },
+    { name: 'og:site_name', content: 'Мягкие окна и пленочные окна из ПВХ' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: 'Мягкие окна и пленочные окна из ПВХ | Утепление и теплоизоляция для вашего дома' },
+    { name: 'twitter:description', content: 'Мягкие окна и пленочные окна из ПВХ для дачи и террас. Отличная теплоизоляция и защита от внешних факторов.' },
+    { name: 'twitter:image', content: 'https://picloud.cc/images/9b7e0b37b66e1ed4ac250884e645b4d5.jpg' },
+  ]
+})
+
 </script>
 
 <template>
@@ -880,7 +903,7 @@ import { useNotifications } from '~/composables/useNotifications';
               :key="index"
             >
               <div class="recomendation__item-icon">
-                <img :src="item.icon" :alt="item.title" />
+                <img :src="item.icon" :alt="item.text" />
               </div>
               <h3 class="recomendation__item-title">{{ item.title }}</h3>
               <p class="recomendation__item-text">{{ item.text }}</p>
@@ -1312,7 +1335,7 @@ import { useNotifications } from '~/composables/useNotifications';
             class="why__card"
           >
             <div class="why__image">
-              <img :src="card.image" :alt="card.title" />
+              <img :src="card.image" :alt="card.text" />
             </div>
             <div class="why__header">
               <svg class="why__card-arc" xmlns="http://www.w3.org/2000/svg">
@@ -1359,7 +1382,7 @@ import { useNotifications } from '~/composables/useNotifications';
             </li>
           </ul>
             <div class="material__images">
-              <img src="~/assets/img/76636daefdd44b058addb6c6bd1ac107.jpg" alt="">
+              <img src="~/assets/img/76636daefdd44b058addb6c6bd1ac107.jpg" alt="Мягкие окна из ПВХ для дачи">
             </div>
           </div>
       </div>
@@ -1400,7 +1423,7 @@ import { useNotifications } from '~/composables/useNotifications';
           <div v-for="(image, index) in processedImages" :key="index">
             <NuxtImg
               :src="image"
-              alt="Изображение с водяным знаком"
+              alt="Пленочные окна ПВХ для дачи, уют и тепло в любое время года"
               width="100%"
               height="auto"
               class="watermark-img"
@@ -1414,7 +1437,7 @@ import { useNotifications } from '~/composables/useNotifications';
 
         <!-- Modal for full-screen view -->
         <div v-if="isModalOpen" class="modal" @click="closeModal">
-          <NuxtImg :src="currentImage || ''" alt="Изображение в полноэкранном режиме" />
+          <NuxtImg :src="currentImage || ''" alt="Мягкие окна для террасы, утепление с помощью ПВХ" />
         </div>
       </div>
     </div>
