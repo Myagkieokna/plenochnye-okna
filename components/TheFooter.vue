@@ -27,7 +27,7 @@
               Все права защищены © 2016 – 2024 Цены на сайте для ознакомления — не являются публичной офертой, определяемой положениями статьи 437 Гражданского кодекса Российской Федерации. Компания оставляет за собой права без уведомления пользователя изменять цены на сайте
             </p>
             <p class="footer__text" style="font-size: 1.5rem;">
-             Разработано <a href="https://vk.com/chernyshevskiii" target="_blank" style="color: #fff;">https://vk.com/chernyshevskiii</a>
+             Разработано <a href="https://vk.com/chernyshevskiii" target="_blank">https://vk.com/chernyshevskiii</a>
             </p>
           <!-- <div class="footer__bottom-left">
             <ul class="footer__bottom-list">
@@ -130,6 +130,15 @@
     line-height: 160%;
     color: #cfcfcf;
     margin-top: 4.8rem;
+    transition: all 0.2s;
+
+    &>a {
+      color: #b0b0b0;
+      transition: all 0.2s;
+      &:hover {
+        color: #fff;
+      }
+    }
   }
 
   &__list-wrapper {
