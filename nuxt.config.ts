@@ -57,69 +57,28 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "Vuetify 3 + Nuxt 3 Starter",
-      titleTemplate: "%s | Vuetify 3 + Nuxt 3 Starter",
+      title: "Мягкие окна и пленочные окна из ПВХ | Утепление и теплоизоляция для вашего дома",
       link: [
-        { rel: "stylesheet", href: "https://rsms.me/inter/inter.css" },
-        { rel: "preconnect", href: "https://rsms.me/" },
-        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-        { rel: "canonical", href: url },
+        // { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        { rel: "canonical", href: "https://plenochnieokna.com" },
       ],
       meta: [
-        {
-          hid: "description",
-          name: "description",
-          content: description,
-        },
-        { property: "og:site_name", content: title },
-        { hid: "og:type", property: "og:type", content: "website" },
-        {
-          hid: "og:url",
-          property: "og:url",
-          content: url,
-        },
-        {
-          hid: "og:image:secure_url",
-          property: "og:image:secure_url",
-          content: image,
-        },
-        {
-          hid: "og:title",
-          property: "og:title",
-          content: title,
-        },
-        {
-          hid: "og:description",
-          property: "og:description",
-          content: description,
-        },
-        {
-          hid: "og:image",
-          property: "og:image",
-          content: image,
-        },
-        //Twitter
+        { name: "description", content: "Мягкие окна и пленочные окна из ПВХ - отличный выбор для утепления и защиты вашего дома. Узнайте о преимуществах и особенностях ПВХ окон для дачи и террас." },
+        { name: "keywords", content: "мягкие окна, пленочные окна, окна из ПВХ, теплоизоляция, пластиковые окна, окна для дачи, окна для террасы, утепление окон, ПВХ окна" },
+        { name: "robots", content: "index, follow" },
+        { name: "author", content: "Мягкие окна" },
+        { name: "viewport", content: "width=device-width, initial-scale=1.0" },
+        { property: "og:title", content: "Мягкие окна и пленочные окна из ПВХ | Утепление и теплоизоляция для вашего дома" },
+        { property: "og:description", content: "Мягкие окна и пленочные окна из ПВХ - лучший выбор для утепления вашего дома и дачи. Преимущества теплоизоляции, долговечности и легкости в обслуживании." },
+        { property: "og:image", content: "https://picloud.cc/images/9b7e0b37b66e1ed4ac250884e645b4d5.jpg" },
+        { property: "og:url", content: "https://plenochnieokna.com" },
+        { property: "og:type", content: "website" },
+        { property: "og:locale", content: "ru_RU" },
+        { property: "og:site_name", content: "Мягкие окна и пленочные окна из ПВХ" },
         { name: "twitter:card", content: "summary_large_image" },
-        {
-          hid: "twitter:url",
-          name: "twitter:url",
-          content: url,
-        },
-        {
-          hid: "twitter:title",
-          name: "twitter:title",
-          content: title,
-        },
-        {
-          hid: "twitter:description",
-          name: "twitter:description",
-          content: description,
-        },
-        {
-          hid: "twitter:image",
-          name: "twitter:image",
-          content: image,
-        },
+        { name: "twitter:title", content: "Мягкие окна и пленочные окна из ПВХ | Утепление и теплоизоляция для вашего дома" },
+        { name: "twitter:description", content: "Мягкие окна и пленочные окна из ПВХ для дачи и террас. Отличная теплоизоляция и защита от внешних факторов." },
+        { name: "twitter:image", content: "https://picloud.cc/images/9b7e0b37b66e1ed4ac250884e645b4d5.jpg" },
       ],
     },
   },

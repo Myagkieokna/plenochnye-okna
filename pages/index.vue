@@ -10,6 +10,7 @@ import btnFloating from "../components/btnFloating.vue";
 import Notification from "~/components/Notification.vue";
 
 
+import { useNotifications } from '~/composables/useNotifications';
 import { tabContents } from "@/data/tabContents";
 import { questions } from "../data/questionsAccordeon";
 
@@ -632,29 +633,29 @@ const changeTab = (tabName: string) => {
 // onMounted(() => {
 //   fetchImages();
 // });
-import { useNotifications } from '~/composables/useNotifications';
 
-definePageMeta({
-  title: 'Мягкие окна из ПВХ | Утепление и теплоизоляция для вашего дома',
-  meta: [
-    { name: 'description', content: 'Мягкие окна и пленочные окна из ПВХ - отличный выбор для утепления и защиты вашего дома. Узнайте о преимуществах и особенностях ПВХ окон для дачи и террас.' },
-    { name: 'keywords', content: 'мягкие окна, пленочные окна, окна из ПВХ, теплоизоляция, пластиковые окна, окна для дачи, окна для террасы, утепление окон, ПВХ окна' },
-    { name: 'robots', content: 'index, follow' },
-    { name: 'author', content: 'Мягкие окна' },
-    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-    { name: 'og:title', content: 'Мягкие окна и пленочные окна из ПВХ | Утепление и теплоизоляция для вашего дома' },
-    { name: 'og:description', content: 'Мягкие окна и пленочные окна из ПВХ - лучший выбор для утепления вашего дома и дачи. Преимущества теплоизоляции, долговечности и легкости в обслуживании.' },
-    { name: 'og:image', content: 'https://picloud.cc/images/9b7e0b37b66e1ed4ac250884e645b4d5.jpg' },
-    { name: 'og:url', content: 'https://plenochnieokna.com' },
-    { name: 'og:type', content: 'website' },
-    { name: 'og:locale', content: 'ru_RU' },
-    { name: 'og:site_name', content: 'Мягкие окна и пленочные окна из ПВХ' },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: 'Мягкие окна и пленочные окна из ПВХ | Утепление и теплоизоляция для вашего дома' },
-    { name: 'twitter:description', content: 'Мягкие окна и пленочные окна из ПВХ для дачи и террас. Отличная теплоизоляция и защита от внешних факторов.' },
-    { name: 'twitter:image', content: 'https://picloud.cc/images/9b7e0b37b66e1ed4ac250884e645b4d5.jpg' },
-  ]
-})
+
+// definePageMeta({
+//   title: 'Мягкие окна из ПВХ | Утепление и теплоизоляция для вашего дома',
+//   meta: [
+//     { name: 'description', content: 'Мягкие окна и пленочные окна из ПВХ - отличный выбор для утепления и защиты вашего дома. Узнайте о преимуществах и особенностях ПВХ окон для дачи и террас.' },
+//     { name: 'keywords', content: 'мягкие окна, пленочные окна, окна из ПВХ, теплоизоляция, пластиковые окна, окна для дачи, окна для террасы, утепление окон, ПВХ окна' },
+//     { name: 'robots', content: 'index, follow' },
+//     { name: 'author', content: 'Мягкие окна' },
+//     { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
+//     { name: 'og:title', content: 'Мягкие окна и пленочные окна из ПВХ | Утепление и теплоизоляция для вашего дома' },
+//     { name: 'og:description', content: 'Мягкие окна и пленочные окна из ПВХ - лучший выбор для утепления вашего дома и дачи. Преимущества теплоизоляции, долговечности и легкости в обслуживании.' },
+//     { name: 'og:image', content: 'https://picloud.cc/images/9b7e0b37b66e1ed4ac250884e645b4d5.jpg' },
+//     { name: 'og:url', content: 'https://plenochnieokna.com' },
+//     { name: 'og:type', content: 'website' },
+//     { name: 'og:locale', content: 'ru_RU' },
+//     { name: 'og:site_name', content: 'Мягкие окна и пленочные окна из ПВХ' },
+//     { name: 'twitter:card', content: 'summary_large_image' },
+//     { name: 'twitter:title', content: 'Мягкие окна и пленочные окна из ПВХ | Утепление и теплоизоляция для вашего дома' },
+//     { name: 'twitter:description', content: 'Мягкие окна и пленочные окна из ПВХ для дачи и террас. Отличная теплоизоляция и защита от внешних факторов.' },
+//     { name: 'twitter:image', content: 'https://picloud.cc/images/9b7e0b37b66e1ed4ac250884e645b4d5.jpg' },
+//   ]
+// })
 
 </script>
 
