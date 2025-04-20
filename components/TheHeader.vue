@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <div class="block" style="width: 100%">
+      <div class="block" style="width: 50%">
         <div class="container">
           <div class="header__menu-block">
             <nav class="header__menu menu" :class="showMobileMenu ? 'active' : ''">
