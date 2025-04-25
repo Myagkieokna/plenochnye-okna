@@ -314,23 +314,33 @@ const sendRequest = async () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload),  // Не забудьте сериализовать данные в JSON
+      body: JSON.stringify(payload),
     });
 
     if (response) {
+      // Яндекс Метрика: отправка цели
+      try {
+        if (typeof ym === 'function') {
+          ym(101397076, 'reachGoal', 'forma_otpravlena'); // Замените на свою цель
+          console.log('Цель отправлена в Яндекс Метрику');
+        } else {
+          console.warn('Функция ym() не определена');
+        }
+      } catch (e) {
+        console.error('Ошибка при отправке цели в Яндекс Метрику:', e);
+      }
+
       // Уведомление об успешной отправке
       addNotification('Сообщение успешно отправлено!', 'success', true);
-      resetQuiz();  // Сброс этапов и данных
+      resetQuiz();
     } else {
-      // Уведомление об ошибке при отправке
       addNotification('Ошибка при отправке сообщения. Пожалуйста, попробуйте позже.', 'error');
-      resetQuiz();  // Сброс этапов и данных
+      resetQuiz();
     }
   } catch (err) {
     console.error("Ошибка при отправке:", err);
-    // Уведомление об ошибке
     addNotification('Ошибка при отправке сообщения. Пожалуйста, попробуйте позже.', 'error');
-    resetQuiz();  // Сброс этапов и данных
+    resetQuiz();
   }
 };
 
