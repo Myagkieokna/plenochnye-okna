@@ -7,8 +7,7 @@ import TheFooter from "../components/TheFooter.vue";
 import vBtn from "../components/AppButton.vue";
 import TabContent from "../components/TabContent.vue";
 import btnFloating from "../components/btnFloating.vue";
-import Notification from "~/components/Notification.vue";
-
+import Notification from "~/components/Notification.vue";                               
 
 import { useNotifications } from '~/composables/useNotifications';
 import { tabContents } from "@/data/tabContents";
@@ -321,7 +320,7 @@ const sendRequest = async () => {
       // Яндекс Метрика: отправка цели
       try {
         if (typeof ym === 'function') {
-          ym(101397076, 'reachGoal', 'forma_otpravlena'); // Замените на свою цель
+          ym(101397076,'reachGoal','forma_send') 
           console.log('Цель отправлена в Яндекс Метрику');
         } else {
           console.warn('Функция ym() не определена');

@@ -1,2 +1,2 @@
-import{e as o,b as a}from"../../_/nitro.mjs";import{r as s}from"../../_/auth.mjs";import"node:async_hooks";const t=o((async o=>(await s(o),a(o))));export{t as default};
+import{e as a,a as o}from"../../_/nitro.mjs";import{r as s}from"../../_/auth.mjs";import"node:async_hooks";const t=a((async a=>(await s(a),o(a))));export{t as default};
 //# sourceMappingURL=index.head.mjs.map
