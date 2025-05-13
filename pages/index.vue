@@ -606,7 +606,7 @@ const changeTab = (tabName: string) => {
 //       const img = new Image();
 //       img.src = image.src;
 //       img.onload = () => {
-//         validImages.value.push(image); // Добавляем изображение, если оно успешно загружено
+//         validImages.value.push(image);
 //       };
 //       img.onerror = () => {
 //         // Если изображение не существует или не может быть загружено, просто пропускаем
@@ -623,7 +623,7 @@ const changeTab = (tabName: string) => {
 //   checkImagesExistence();
 // });
 
-// const images = ref<ImageWithWatermark[]>([]);  // Объявляем тип для images
+// const images = ref<ImageWithWatermark[]>([]);
 
 // const fetchImages = async () => {
 //   try {
@@ -685,9 +685,7 @@ const changeTab = (tabName: string) => {
             <div class="hero__buttons">
               <nuxt-link       
                 class="hero__btn" 
-                href="https://wa.me/+79661266606" 
-                target="_blank" 
-                aria-label="Написать в WhatsApp"
+                href="#smeta1"
                 >Расчет стоимости</nuxt-link>
             </div>
           </div>
@@ -838,13 +836,287 @@ const changeTab = (tabName: string) => {
                     </defs>
                   </svg> -->
                 </div>
-                <h2 class="feedback__item-title">Наши Преимущества</h2>
+                <h2 class="feedback__item-title" id="smeta1">Наши Преимущества</h2>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="estimates" id="smeta">
+<div class="">
+  <h2 class="estimates__title" style="display: flex; justify-content: center">
+Получить смету
+</h2>
+    <p class="estimates__subtitle">
+Вы можете позвонить и все вопросы по телефону уточнить, либо составить
+смету и отправить нам, а мы уже вам перезвоним для ответа
+</p>
+</div>
+<div class="estimates__inner">
+  <div class="estimates-form-wrapper">
+    <div class="estimates__image"></div>
+    <div class="estimates__block">
+    <h2 class="estimates__title" style="display: flex; justify-content: center">
+Получить смету
+</h2>
+    <p class="estimates__subtitle">
+Вы можете позвонить и все вопросы по телефону уточнить, либо составить
+смету и отправить нам, а мы уже вам перезвоним для ответа
+</p>
+</div>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz__inner">
+      <!-- Шкала заполнения -->
+      <div class="quiz__progress-container">
+        <!-- Процент прогресса -->
+        <div class="quiz__progress-percent">
+          {{ ((currentStep / steps.length) * 100).toFixed(0) }}%
+        </div>
+
+        <!-- Прогресс-бар -->
+        <div class="quiz__progress-bar">
+          <div
+            class="quiz__progress-bar-fill"
+            :style="{ width: `${(currentStep / steps.length) * 100}%` }"
+          ></div>
+        </div>
+      </div>
+      <div class="quiz__progress-question-step">
+        <p>Вопрос {{currentStep}}</p>
+      </div>
+      <!-- Контент шагов -->
+      <div v-if="currentStep === 1" class="quiz__step">
+        <h2 class="quiz__title">
+          Укажите примерную площадь мягкого остекления в м²
+        </h2>
+        <div class="quiz__slider-container">
+          <!-- Контейнер слайдера -->
+          <div
+            class="quiz__slider-wrapper"
+            :style="sliderProgressStyle"
+          >
+            <!-- Слайдер -->
+            <input
+              type="range"
+              min="1"
+              max="100"
+              v-model="answers.area"
+              class="quiz__slider"
+            />
+          </div>
+          <p class="quiz__slider-value">{{ answers.area }} м²</p>
+        </div>
+      </div>
+
+      <div v-if="currentStep === 2" class="quiz__step">
+        <h2 class="quiz__title">Сколько будет дверных проемов?</h2>
+        <div class="quiz__options">
+          <div
+            v-for="(item, index) in doorOptions"
+            :key="index"
+            @click="selectDoorway(item)"
+            :class="['quiz__option', { 'quiz__option--selected': answers.doorways?.id === item.id }]"
+
+          >
+            <img
+              class="quiz__option-image"
+              :src="item.image"
+              :alt="item.text"
+            />
+            <p class="quiz__option-text">{{ item.text }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div v-if="currentStep === 3" class="quiz__step">
+        <h2 class="quiz__title">Потребуется ли москитная сетка?</h2>
+        <div class="quiz__radio-group">
+          <label
+            v-for="(option, index) in mosquitoOptions"
+            :key="index"
+            class="quiz__radio-label"
+          >
+            <input
+              type="radio"
+              :value="option.value"
+              v-model="answers.mosquito"
+              class="quiz__radio-input"
+            />
+            <span class="quiz__radio-span"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.5 5.4L4.14546 8.22183C4.54054 8.64324 5.20946 8.64324 5.60454 8.22183L10.5 3" stroke="#0C1132" stroke-width="2" stroke-linecap="round" />
+</svg></span>
+<p class="text">{{ option.text }}</p>
+          </label>
+        </div>
+      </div> -->
+
+      <div v-if="currentStep === 3" class="quiz__step">
+        <h2 class="quiz__title">
+          На что будут монтироваться мягкие окна?
+        </h2>
+        <div class="quiz__radio-group">
+          <label
+            v-for="(option, index) in mountOptions"
+            :key="index"
+            class="quiz__radio-label"
+          >
+            <input
+              type="radio"
+              :value="option"
+              v-model="answers.mount"
+              class="quiz__radio-input"
+            />
+            <span class="quiz__radio-span"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.5 5.4L4.14546 8.22183C4.54054 8.64324 5.20946 8.64324 5.60454 8.22183L10.5 3" stroke="#0C1132" stroke-width="2" stroke-linecap="round" />
+</svg></span>
+<p>{{ option }}</p>
+          </label>
+        </div>
+      </div>
+
+      <div v-if="currentStep === 4" class="quiz__step">
+        <h2 class="quiz__title">Какая комплектация необходима?</h2>
+        <div class="quiz__equipments">
+          <div
+            v-for="(item, index) in configurationOptions"
+            :key="index"
+            @click="selectConfiguration(item)"
+            :class="[
+              'quiz__option quiz__equipment-item',
+              {
+                'quiz__option--selected':
+                  answers.configuration?.id === item.id,
+              },
+            ]"
+          >
+            <img
+              class="quiz__equipment-image"
+              :src="item.image"
+              :alt="item.name"
+            />
+            <div class="quiz__equipment-block-text">
+            <p class="quiz__equipment-text">{{ item.name }}</p>
+            <h4 class="quiz__equipment-title">{{ item.title }}</h4>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="currentStep === 5" class="quiz__step">
+        <h2 class="quiz__title">Установите сами или нужен монтаж?</h2>
+        <div class="quiz__radio-group">
+          <label 
+          v-for="(option, index) in installOptions"
+            :key="index"
+            class="quiz__radio-label">
+<input
+type="radio"
+:value="option.value"
+v-model="answers.installation"
+class="quiz__radio-input"
+/>
+<span class="quiz__radio-span"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.5 5.4L4.14546 8.22183C4.54054 8.64324 5.20946 8.64324 5.60454 8.22183L10.5 3" stroke="#0C1132" stroke-width="2" stroke-linecap="round" />
+</svg></span>
+<p class="text">{{ option.text }}</p>
+</label>
+        </div>
+      </div>
+
+      <div v-if="currentStep === 6" class="quiz__step">
+        <h2 class="quiz__title">
+          Когда планируете устанавливать мягкие окна?
+        </h2>
+        <div class="quiz__radio-group">
+          <label
+            v-for="(option, index) in scheduleOptions"
+            :key="index"
+            class="quiz__radio-label"
+          >
+            <input
+              type="radio"
+              :value="option.value"
+              v-model="answers.schedule"
+              class="quiz__radio-input"
+            />
+            <span class="quiz__radio-span"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.5 5.4L4.14546 8.22183C4.54054 8.64324 5.20946 8.64324 5.60454 8.22183L10.5 3" stroke="#0C1132" stroke-width="2" stroke-linecap="round" />
+</svg></span>
+<p>{{ option.text }}</p>
+          </label>
+        </div>
+      </div>
+
+      <div v-if="currentStep === 7" class="quiz__step">
+<p class="quiz__title">
+Заполните контактную информацию и с вами обязательно свяжутся в ближайшее время
+</p>
+<div class="contact-form">
+<form class="contact-form__form" @submit.prevent="sendRequest">
+  <div class="contact-form__form-field-block">
+    <div class="contact-form__field">
+      <label class="contact-form__label" for="name">Имя</label>
+      <input
+        class="contact-form__input"
+        type="text"
+        id="name"
+        v-model="contactInfo.name"
+        required
+      />
+    </div>
+    <div class="contact-form__field">
+      <label class="contact-form__label" for="phone">Телефон</label>
+      <input
+        class="contact-form__input"
+        type="text"
+        id="phone"
+        v-model="contactInfo.phone"
+        @input="formatPhone"
+        placeholder="+7 (___) ___-__-__"
+        required
+      />
+    </div>
+  </div>
+  <div class="contact-form__field">
+    <label class="contact-form__label" for="message">Комментарий</label>
+    <textarea
+      class="contact-form__input contact-form__input-textarea"
+      id="message"
+      v-model="contactInfo.message"
+      style="width: 100%;"
+    ></textarea>
+  </div>
+</form>
+</div>
+</div>
+
+      <!-- Управление -->
+      <div class="quiz__controls">
+        <button
+          class="quiz__button quiz__button--prev"
+          @click="prevStep"
+          :disabled="currentStep === 1"
+        >
+          Назад
+        </button>
+        <button
+          class="quiz__button quiz__button--next"
+          @click="handleNext"
+          :disabled="!canProceed"
+        >
+          {{ currentStep < 7 ? "Далее" : "Отправить" }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
     <section class="recomendation" id="advantages">
       <div class="container">
         <div class="recomendation__inner">
@@ -922,7 +1194,7 @@ const changeTab = (tabName: string) => {
         </div>
       </div>
     </section>
-
+    
     <div class="price" id="price">
     <div class="container">
       <div class="price__inner">
@@ -1032,271 +1304,6 @@ const changeTab = (tabName: string) => {
         </div>
       </div>
     </div> -->
-
-    <div class="estimates" id="smeta">
-
-        <div class="estimates__inner">
-          <div class="estimates-form-wrapper">
-            <div class="estimates__image"></div>
-            <div class="estimates__block">
-            <h2 class="estimates__title" style="display: flex; justify-content: center">
-      Получить смету
-    </h2>
-            <p class="estimates__subtitle">
-      Вы можете позвонить и все вопросы по телефону уточнить, либо составить
-      смету и отправить нам, а мы уже вам перезвоним для ответа
-    </p>
-  </div>
-          </div>
-
-          <div class="quiz">
-            <div class="quiz__inner">
-              <!-- Шкала заполнения -->
-              <div class="quiz__progress-container">
-                <!-- Процент прогресса -->
-                <div class="quiz__progress-percent">
-                  {{ ((currentStep / steps.length) * 100).toFixed(0) }}%
-                </div>
-
-                <!-- Прогресс-бар -->
-                <div class="quiz__progress-bar">
-                  <div
-                    class="quiz__progress-bar-fill"
-                    :style="{ width: `${(currentStep / steps.length) * 100}%` }"
-                  ></div>
-                </div>
-              </div>
-              <div class="quiz__progress-question-step">
-                <p>Вопрос {{currentStep}}</p>
-              </div>
-              <!-- Контент шагов -->
-              <div v-if="currentStep === 1" class="quiz__step">
-                <h2 class="quiz__title">
-                  Укажите примерную площадь мягкого остекления в м²
-                </h2>
-                <div class="quiz__slider-container">
-                  <!-- Контейнер слайдера -->
-                  <div
-                    class="quiz__slider-wrapper"
-                    :style="sliderProgressStyle"
-                  >
-                    <!-- Слайдер -->
-                    <input
-                      type="range"
-                      min="1"
-                      max="100"
-                      v-model="answers.area"
-                      class="quiz__slider"
-                    />
-                  </div>
-                  <p class="quiz__slider-value">{{ answers.area }} м²</p>
-                </div>
-              </div>
-
-              <div v-if="currentStep === 2" class="quiz__step">
-                <h2 class="quiz__title">Сколько будет дверных проемов?</h2>
-                <div class="quiz__options">
-                  <div
-                    v-for="(item, index) in doorOptions"
-                    :key="index"
-                    @click="selectDoorway(item)"
-                    :class="['quiz__option', { 'quiz__option--selected': answers.doorways?.id === item.id }]"
-
-                  >
-                    <img
-                      class="quiz__option-image"
-                      :src="item.image"
-                      :alt="item.text"
-                    />
-                    <p class="quiz__option-text">{{ item.text }}</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- <div v-if="currentStep === 3" class="quiz__step">
-                <h2 class="quiz__title">Потребуется ли москитная сетка?</h2>
-                <div class="quiz__radio-group">
-                  <label
-                    v-for="(option, index) in mosquitoOptions"
-                    :key="index"
-                    class="quiz__radio-label"
-                  >
-                    <input
-                      type="radio"
-                      :value="option.value"
-                      v-model="answers.mosquito"
-                      class="quiz__radio-input"
-                    />
-                    <span class="quiz__radio-span"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M1.5 5.4L4.14546 8.22183C4.54054 8.64324 5.20946 8.64324 5.60454 8.22183L10.5 3" stroke="#0C1132" stroke-width="2" stroke-linecap="round" />
-</svg></span>
-    <p class="text">{{ option.text }}</p>
-                  </label>
-                </div>
-              </div> -->
-
-              <div v-if="currentStep === 3" class="quiz__step">
-                <h2 class="quiz__title">
-                  На что будут монтироваться мягкие окна?
-                </h2>
-                <div class="quiz__radio-group">
-                  <label
-                    v-for="(option, index) in mountOptions"
-                    :key="index"
-                    class="quiz__radio-label"
-                  >
-                    <input
-                      type="radio"
-                      :value="option"
-                      v-model="answers.mount"
-                      class="quiz__radio-input"
-                    />
-                    <span class="quiz__radio-span"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M1.5 5.4L4.14546 8.22183C4.54054 8.64324 5.20946 8.64324 5.60454 8.22183L10.5 3" stroke="#0C1132" stroke-width="2" stroke-linecap="round" />
-</svg></span>
-    <p>{{ option }}</p>
-                  </label>
-                </div>
-              </div>
-
-              <div v-if="currentStep === 4" class="quiz__step">
-                <h2 class="quiz__title">Какая комплектация необходима?</h2>
-                <div class="quiz__equipments">
-                  <div
-                    v-for="(item, index) in configurationOptions"
-                    :key="index"
-                    @click="selectConfiguration(item)"
-                    :class="[
-                      'quiz__option quiz__equipment-item',
-                      {
-                        'quiz__option--selected':
-                          answers.configuration?.id === item.id,
-                      },
-                    ]"
-                  >
-                    <img
-                      class="quiz__equipment-image"
-                      :src="item.image"
-                      :alt="item.name"
-                    />
-                    <div class="quiz__equipment-block-text">
-                    <p class="quiz__equipment-text">{{ item.name }}</p>
-                    <h4 class="quiz__equipment-title">{{ item.title }}</h4>
-                  </div>
-                  </div>
-                </div>
-              </div>
-
-              <div v-if="currentStep === 5" class="quiz__step">
-                <h2 class="quiz__title">Установите сами или нужен монтаж?</h2>
-                <div class="quiz__radio-group">
-                  <label 
-                  v-for="(option, index) in installOptions"
-                    :key="index"
-                    class="quiz__radio-label">
-    <input
-    type="radio"
-    :value="option.value"
-    v-model="answers.installation"
-    class="quiz__radio-input"
-    />
-    <span class="quiz__radio-span"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M1.5 5.4L4.14546 8.22183C4.54054 8.64324 5.20946 8.64324 5.60454 8.22183L10.5 3" stroke="#0C1132" stroke-width="2" stroke-linecap="round" />
-</svg></span>
-    <p class="text">{{ option.text }}</p>
-  </label>
-                </div>
-              </div>
-
-              <div v-if="currentStep === 6" class="quiz__step">
-                <h2 class="quiz__title">
-                  Когда планируете устанавливать мягкие окна?
-                </h2>
-                <div class="quiz__radio-group">
-                  <label
-                    v-for="(option, index) in scheduleOptions"
-                    :key="index"
-                    class="quiz__radio-label"
-                  >
-                    <input
-                      type="radio"
-                      :value="option.value"
-                      v-model="answers.schedule"
-                      class="quiz__radio-input"
-                    />
-                    <span class="quiz__radio-span"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M1.5 5.4L4.14546 8.22183C4.54054 8.64324 5.20946 8.64324 5.60454 8.22183L10.5 3" stroke="#0C1132" stroke-width="2" stroke-linecap="round" />
-</svg></span>
-    <p>{{ option.text }}</p>
-                  </label>
-                </div>
-              </div>
-
-              <div v-if="currentStep === 7" class="quiz__step">
-      <p class="quiz__title">
-        Заполните контактную информацию и с вами обязательно свяжутся в ближайшее время
-      </p>
-      <div class="contact-form">
-        <form class="contact-form__form" @submit.prevent="sendRequest">
-          <div class="contact-form__form-field-block">
-            <div class="contact-form__field">
-              <label class="contact-form__label" for="name">Имя</label>
-              <input
-                class="contact-form__input"
-                type="text"
-                id="name"
-                v-model="contactInfo.name"
-                required
-              />
-            </div>
-            <div class="contact-form__field">
-              <label class="contact-form__label" for="phone">Телефон</label>
-              <input
-                class="contact-form__input"
-                type="text"
-                id="phone"
-                v-model="contactInfo.phone"
-                @input="formatPhone"
-                placeholder="+7 (___) ___-__-__"
-                required
-              />
-            </div>
-          </div>
-          <div class="contact-form__field">
-            <label class="contact-form__label" for="message">Комментарий</label>
-            <textarea
-              class="contact-form__input contact-form__input-textarea"
-              id="message"
-              v-model="contactInfo.message"
-              style="width: 100%;"
-            ></textarea>
-          </div>
-        </form>
-      </div>
-    </div>
-
-              <!-- Управление -->
-              <div class="quiz__controls">
-                <button
-                  class="quiz__button quiz__button--prev"
-                  @click="prevStep"
-                  :disabled="currentStep === 1"
-                >
-                  Назад
-                </button>
-                <button
-                  class="quiz__button quiz__button--next"
-                  @click="handleNext"
-                  :disabled="!canProceed"
-                >
-                  {{ currentStep < 7 ? "Далее" : "Отправить" }}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-    </div>
 
     <section class="why" id="why">
     <h2 class="why__title">Почему выбирают <span class="orange">нас?</span></h2>
@@ -1471,6 +1478,16 @@ const changeTab = (tabName: string) => {
 </template>
 
 <style lang="scss" scoped>
+
+.main {
+  margin-top: 25.3rem;
+}
+
+@media (max-width: 1099.98px) {
+  .main {
+  margin-top: 16.5rem;
+}
+}
 
 .watermark-img {
   border-radius: 8px;
@@ -3622,5 +3639,9 @@ position: relative;
   height: auto !important;
 }
 
+.estimates__title {color: #fff;}
+
+.estimates__subtitle {color: #fff;
+margin-bottom: 3rem;}
 
 </style>

@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <div class="block" style="width: 100%; ">
+      <div class="block" style="width: 100%">
         <div class="container">
           <div class="header__menu-block">
             <nav class="header__menu menu" :class="showMobileMenu ? 'active' : ''">
@@ -42,14 +42,17 @@
                   </NuxtLink>
                 </li>
               </ul>
-              <div class="header__buttons" style="margin-top: 5rem; gap: 3rem;">
-                <div class="block-text" style="display: flex; gap: 0.5rem; flex-direction: column; align-items: center;">
+              <div class="header__buttons" style="margin-top: 5rem; gap: 3rem">
+                <div
+                  class="block-text"
+                  style="display: flex; gap: 0.5rem; flex-direction: column; align-items: center"
+                >
                   <a
                     class="header__button-link"
                     href="tel:+79661266606"
                     target="_blank"
                     aria-label="Позвонить"
-                    style="text-align: center;"
+                    style="text-align: center"
                     >+7 (966) 126-66-06</a
                   >
                   <p class="header__button-link" style="text-align: center; color: #c6c6c6">
@@ -57,7 +60,10 @@
                     Пионерская улица, 1А
                   </p>
                 </div>
-                <div class="block-text" style="display: flex; flex-direction: column; align-items: center;">
+                <div
+                  class="block-text"
+                  style="display: flex; flex-direction: column; align-items: center"
+                >
                   <p class="text">Работаем ежедневно</p>
                   <p class="text">с 10:00 до 19:00</p>
                 </div>
@@ -130,6 +136,12 @@ const scrollToElement = (target: string) => {
 <style scoped lang="scss">
 .header {
   background-color: #191919;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+
   @media (max-width: 1099.98px) {
     &__burger {
       z-index: 6;
@@ -357,6 +369,12 @@ const scrollToElement = (target: string) => {
     &:hover {
       color: #82dbf7;
     }
+  }
+}
+
+@media (max-width: 1099.98px) {
+  .header {
+    height: 17rem;
   }
 }
 
