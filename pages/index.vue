@@ -436,14 +436,14 @@ const services = [
     title: "Комплект «Эконом»",
     image: "/img/IMG_5912.jfif",
     description: "Пленка 700 мкм, морозостойкая до -39°C, окантовка ПВХ без фурнитуры",
-    prices: ["от 1500 руб.", "от 1400 руб.", "от 1300 руб."],
+    prices: ["от 1400 руб.", "от 1300 руб.", "от 1200 руб."],
     size: ["до 15 м²", "от 15 м² до 50 м²", "более 50 м²"]
   },
   {
     title: "Комплект «Стандарт»",
     image: "/img/IMG_5910.jfif",
     description: "Пленка 700 мкм, устойчивость к ультрафиолету, окантовка ПВХ с фурнитурой.",
-    prices: ["от 2000 руб.", "от 1900 руб.", "от 1800 руб."],
+    prices: ["от 1600 руб.", "от 1500 руб.", "от 1400 руб."],
     size: ["до 15 м²", "от 15 м² до 30 м²", "более 30 м²"]
   },
   {
@@ -537,135 +537,6 @@ const selectedTab = ref<string>("tape");
 const changeTab = (tabName: string) => {
   selectedTab.value = tabName;
 };
-
-// interface ImageWithWatermark {
-//   src: string;
-// }
-
-// const images = ref<ImageWithWatermark[]>([
-//   { src: '/img/gallery/gallery1.jpeg',},
-//   { src: '/img/gallery/gallery2.jpeg',},
-//   { src: '/img/gallery/gallery3.jpeg'},
-//   { src: '/img/gallery/gallery4.jpeg'},
-//   { src: '/img/gallery/gallery5.jpeg'},
-//   { src: '/img/gallery/gallery6.jpeg'},
-//   { src: '/img/gallery/gallery7.jpeg'},
-//   { src: '/img/gallery/gallery8.jpeg'},
-//   { src: '/img/gallery/gallery9.jpeg'},
-//   { src: '/img/gallery/gallery10.jpeg'},
-//   { src: '/img/gallery/gallery11.jpeg'},
-//   { src: '/img/gallery/gallery12.jpeg'},
-//   { src: '/img/gallery/gallery13.jpeg'},
-//   { src: '/img/gallery/gallery14.jpeg'},
-//   { src: '/img/gallery/gallery15.jpeg'},
-//   { src: '/img/gallery/gallery16.jpeg'},
-//   { src: '/img/gallery/gallery17.jpeg'},
-//   { src: '/img/gallery/gallery18.jpeg'},
-//   { src: '/img/gallery/gallery19.jpeg'},
-//   { src: '/img/gallery/gallery20.jpeg'},
-//   { src: '/img/gallery/gallery21.jpeg'},
-//   { src: '/img/gallery/gallery22.jpeg'},
-//   { src: '/img/gallery/gallery23.jpeg'},
-//   { src: '/img/gallery/gallery24.jpeg'},
-//   { src: '/img/gallery/gallery25.jpeg'},
-//   { src: '/img/gallery/gallery26.jpeg'},
-//   { src: '/img/gallery/gallery27.jpeg'},
-//   { src: '/img/gallery/gallery28.jpeg'},
-//   { src: '/img/gallery/gallery29.jpeg'},
-//   { src: '/img/gallery/gallery30.jpeg'},
-//   { src: '/img/gallery/gallery31.jpeg'},
-//   { src: '/img/gallery/gallery32.jpeg'},
-//   { src: '/img/gallery/gallery33.jpeg'},
-//   { src: '/img/gallery/gallery34.jpeg'},
-//   { src: '/img/gallery/gallery35.jpeg'},
-//   { src: '/img/gallery/gallery36.jpeg'},
-//   { src: '/img/gallery/gallery37.jpeg'},
-//   { src: '/img/gallery/gallery38.jpeg'},
-//   { src: '/img/gallery/gallery39.jpeg'},
-//   { src: '/img/gallery/gallery40.jpeg'},
-//   { src: '/img/gallery/gallery41.jpeg'},
-//   { src: '/img/gallery/gallery42.jpeg'},
-//   { src: '/img/gallery/gallery43.jpeg'},
-//   { src: '/img/gallery/gallery44.jpeg'},
-//   { src: '/img/gallery/gallery45.jpeg'},
-//   { src: '/img/gallery/gallery46.jpeg'},
-//   { src: '/img/gallery/gallery47.jpeg'},
-//   { src: '/img/gallery/gallery48.jpeg'},
-//   { src: '/img/gallery/gallery49.jpeg'},
-//   { src: '/img/gallery/gallery50.jpeg'},
-//   { src: '/img/gallery/gallery51.jpeg'},
-//   { src: '/img/gallery/gallery52.jpeg'},
-// ]);
-
-// // Фильтруем изображения, проверяя, существуют ли они
-// const validImages = ref<ImageWithWatermark[]>([]);
-
-// const checkImagesExistence = async () => {
-//   for (const image of images.value) {
-//     try {
-//       const img = new Image();
-//       img.src = image.src;
-//       img.onload = () => {
-//         validImages.value.push(image);
-//       };
-//       img.onerror = () => {
-//         // Если изображение не существует или не может быть загружено, просто пропускаем
-//         console.log(`Image not found: ${image.src}`);
-//       };
-//     } catch (error) {
-//       console.error(`Error loading image: ${image.src}`, error);
-//     }
-//   }
-// };
-
-// // Вызываем проверку при монтировании
-// onMounted(() => {
-//   checkImagesExistence();
-// });
-
-// const images = ref<ImageWithWatermark[]>([]);
-
-// const fetchImages = async () => {
-//   try {
-//     const data = await $fetch<ImageWithWatermark[]>('/api/images');
-//     if (data && Array.isArray(data)) {
-//       images.value = data.filter(item => item.src); // Проверка на корректность src
-//     } else {
-//       console.error('Некорректные данные от сервера');
-//     }
-//   } catch (error) {
-//     console.error('Ошибка при загрузке изображений:', error);
-//   }
-// };
-
-
-// onMounted(() => {
-//   fetchImages();
-// });
-
-
-// definePageMeta({
-//   title: 'Мягкие окна из ПВХ | Утепление и теплоизоляция для вашего дома',
-//   meta: [
-//     { name: 'description', content: 'Мягкие окна и пленочные окна из ПВХ - отличный выбор для утепления и защиты вашего дома. Узнайте о преимуществах и особенностях ПВХ окон для дачи и террас.' },
-//     { name: 'keywords', content: 'мягкие окна, пленочные окна, окна из ПВХ, теплоизоляция, пластиковые окна, окна для дачи, окна для террасы, утепление окон, ПВХ окна' },
-//     { name: 'robots', content: 'index, follow' },
-//     { name: 'author', content: 'Мягкие окна' },
-//     { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-//     { name: 'og:title', content: 'Мягкие окна и пленочные окна из ПВХ | Утепление и теплоизоляция для вашего дома' },
-//     { name: 'og:description', content: 'Мягкие окна и пленочные окна из ПВХ - лучший выбор для утепления вашего дома и дачи. Преимущества теплоизоляции, долговечности и легкости в обслуживании.' },
-//     { name: 'og:image', content: 'https://picloud.cc/images/9b7e0b37b66e1ed4ac250884e645b4d5.jpg' },
-//     { name: 'og:url', content: 'https://plenochnieokna.com' },
-//     { name: 'og:type', content: 'website' },
-//     { name: 'og:locale', content: 'ru_RU' },
-//     { name: 'og:site_name', content: 'Мягкие окна и пленочные окна из ПВХ' },
-//     { name: 'twitter:card', content: 'summary_large_image' },
-//     { name: 'twitter:title', content: 'Мягкие окна и пленочные окна из ПВХ | Утепление и теплоизоляция для вашего дома' },
-//     { name: 'twitter:description', content: 'Мягкие окна и пленочные окна из ПВХ для дачи и террас. Отличная теплоизоляция и защита от внешних факторов.' },
-//     { name: 'twitter:image', content: 'https://picloud.cc/images/9b7e0b37b66e1ed4ac250884e645b4d5.jpg' },
-//   ]
-// })
-
 </script>
 
 <template>
@@ -709,40 +580,6 @@ const changeTab = (tabName: string) => {
                     style="width: 80px; height: 80px; border-radius: 50%;"
                     alt=""
                   />
-                  <!-- <svg
-                    width="90"
-                    height="90"
-                    viewBox="0 0 170 170"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style="position: absolute"
-                    class="rotating"
-                  >
-                    <circle
-                      cx="85"
-                      cy="85"
-                      r="83"
-                      stroke="url(#paint0_linear_544_191)"
-                      stroke-width="6"
-                    />
-                    <defs>
-                      <linearGradient
-                        id="paint0_linear_544_191"
-                        x1="0"
-                        y1="85"
-                        x2="165"
-                        y2="85"
-                        gradientUnits="userSpaceOnUse"
-                      >
-                        <stop stop-color="#82dbf7" />
-                        <stop
-                          offset="1"
-                          stop-color="#82dbf7"
-                          stop-opacity="0"
-                        />
-                      </linearGradient>
-                    </defs>
-                  </svg> -->
                 </div>
                 <h2 class="feedback__item-title">Наши работы</h2>
               </div>
@@ -755,40 +592,6 @@ const changeTab = (tabName: string) => {
                     style="width: 80px; height: 80px; border-radius: 50%;"
                     alt=""
                   />
-                  <!-- <svg
-                    width="90"
-                    height="90"
-                    viewBox="0 0 170 170"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style="position: absolute; transform: rotate(125deg)"
-                    class="rotating"
-                  >
-                    <circle
-                      cx="85"
-                      cy="85"
-                      r="83"
-                      stroke="url(#paint0_linear_544_191)"
-                      stroke-width="6"
-                    />
-                    <defs>
-                      <linearGradient
-                        id="paint0_linear_544_191"
-                        x1="0"
-                        y1="85"
-                        x2="165"
-                        y2="85"
-                        gradientUnits="userSpaceOnUse"
-                      >
-                        <stop stop-color="#82dbf7" />
-                        <stop
-                          offset="1"
-                          stop-color="#82dbf7"
-                          stop-opacity="0"
-                        />
-                      </linearGradient>
-                    </defs>
-                  </svg> -->
                 </div>
                 <h2 class="feedback__item-title">Услуги</h2>
               </div>
@@ -801,40 +604,6 @@ const changeTab = (tabName: string) => {
                     style="width: 80px; height: 80px; border-radius: 50%;"
                     alt=""
                   />
-                  <!-- <svg
-                    width="90"
-                    height="90"
-                    viewBox="0 0 170 170"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style="position: absolute; transform: rotate(220deg)"
-                    class="rotating"
-                  >
-                    <circle
-                      cx="85"
-                      cy="85"
-                      r="83"
-                      stroke="url(#paint0_linear_544_191)"
-                      stroke-width="6"
-                    />
-                    <defs>
-                      <linearGradient
-                        id="paint0_linear_544_191"
-                        x1="0"
-                        y1="85"
-                        x2="165"
-                        y2="85"
-                        gradientUnits="userSpaceOnUse"
-                      >
-                        <stop stop-color="#82dbf7" />
-                        <stop
-                          offset="1"
-                          stop-color="#82dbf7"
-                          stop-opacity="0"
-                        />
-                      </linearGradient>
-                    </defs>
-                  </svg> -->
                 </div>
                 <h2 class="feedback__item-title" id="smeta1">Наши Преимущества</h2>
               </div>
@@ -932,28 +701,6 @@ const changeTab = (tabName: string) => {
         </div>
       </div>
 
-      <!-- <div v-if="currentStep === 3" class="quiz__step">
-        <h2 class="quiz__title">Потребуется ли москитная сетка?</h2>
-        <div class="quiz__radio-group">
-          <label
-            v-for="(option, index) in mosquitoOptions"
-            :key="index"
-            class="quiz__radio-label"
-          >
-            <input
-              type="radio"
-              :value="option.value"
-              v-model="answers.mosquito"
-              class="quiz__radio-input"
-            />
-            <span class="quiz__radio-span"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1.5 5.4L4.14546 8.22183C4.54054 8.64324 5.20946 8.64324 5.60454 8.22183L10.5 3" stroke="#0C1132" stroke-width="2" stroke-linecap="round" />
-</svg></span>
-<p class="text">{{ option.text }}</p>
-          </label>
-        </div>
-      </div> -->
-
       <div v-if="currentStep === 3" class="quiz__step">
         <h2 class="quiz__title">
           На что будут монтироваться мягкие окна?
@@ -970,10 +717,12 @@ const changeTab = (tabName: string) => {
               v-model="answers.mount"
               class="quiz__radio-input"
             />
-            <span class="quiz__radio-span"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1.5 5.4L4.14546 8.22183C4.54054 8.64324 5.20946 8.64324 5.60454 8.22183L10.5 3" stroke="#0C1132" stroke-width="2" stroke-linecap="round" />
-</svg></span>
-<p>{{ option }}</p>
+            <span class="quiz__radio-span">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.5 5.4L4.14546 8.22183C4.54054 8.64324 5.20946 8.64324 5.60454 8.22183L10.5 3" stroke="#0C1132" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </span>
+            <p>{{ option }}</p>
           </label>
         </div>
       </div>
@@ -1360,9 +1109,6 @@ class="quiz__radio-input"
               </svg>
               <h3 class="why__card-title">{{ card.title }}</h3>
               <p class="why__card-text">{{ card.text }}</p>
-              <!-- <div v-if="card.button" class="why__card-button-wrapper">
-                <button class="why__card-button">{{ card.button }}</button>
-              </div> -->
             </div>
           </swiper-slide>
         </swiper-container>
