@@ -22,18 +22,14 @@
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@types/node-telegram-bot-api": "^0.64.7",
-    "@vite-pwa/nuxt": "^0.10.6",
     "@vueuse/nuxt": "^12.0.0",
     "nuxt": "3.14.1592",
     "nuxt-swiper": "^2.0.0",
-    "sass": "^1.81.0",
-    "vuetify": "^3.7.4"
+    "sass": "^1.81.0"
   },
   "dependencies": {
-    "glob": "^11.0.0",
     "node-telegram-bot-api": "^0.66.0",
     "swiper": "^11.1.15",
-    "vite-plugin-vuetify": "^2.0.4",
     "vue": "latest",
     "vue-router": "latest",
     "watermarkjs": "^2.1.1"
