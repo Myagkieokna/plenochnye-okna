@@ -23,13 +23,15 @@
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@types/node-telegram-bot-api": "^0.64.7",
     "@vueuse/nuxt": "^12.0.0",
-    "nuxt": "3.14.1592",
+    "nuxt": "^3.17.6",
     "nuxt-swiper": "^2.0.0",
     "sass": "^1.81.0"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.11.1",
+    "pinia": "^3.0.3",
     "node-telegram-bot-api": "^0.66.0",
+    "nuxt-scheduler": "^0.1.9",
     "swiper": "^11.1.15",
     "vue": "latest",
     "vue-router": "latest",
