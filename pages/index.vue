@@ -1184,23 +1184,23 @@ class="quiz__radio-input"
         <!-- Processed images -->
         <div v-else class="watermark-else">
           <div v-for="(image, index) in processedImages" :key="index">
-            <NuxtImg
-              :src="image"
-              alt="Пленочные окна ПВХ для дачи, уют и тепло в любое время года"
-              width="100%"
-              height="auto"
-              class="watermark-img"
-              quality="80"
-              format="webp"
-              loading="lazy"
-              @click="openModal(image)"
-            />
+<img
+  :src="image"
+  alt="Пленочные окна ПВХ для дачи, уют и тепло в любое время года"
+  style="width: 100%; height: auto;"
+  class="watermark-img"
+  loading="lazy"
+  @click="openModal(image)"
+/>
           </div>
         </div>
 
         <!-- Modal for full-screen view -->
         <div v-if="isModalOpen" class="modal" @click="closeModal">
-          <NuxtImg :src="currentImage || ''" alt="Мягкие окна для террасы, утепление с помощью ПВХ" />
+<img
+  :src="currentImage || ''"
+  alt="Мягкие окна для террасы, утепление с помощью ПВХ"
+/>
         </div>
       </div>
     </div>

@@ -9,17 +9,15 @@
   <!-- Processed images -->
   <div v-else class="watermark-else">
     <div v-for="(image, index) in processedImages" :key="index">
-      <NuxtImg
-        :src="image"
-        alt="Изображение с водяным знаком"
-        width="100%"
-        height="auto"
-        class="watermark-img"
-        quality="80"
-        format="webp"
-        loading="lazy"
-        @click="openModal(image)"
-      />
+<img
+  :src="image"
+  alt="Изображение с водяным знаком"
+  style="width: 100%; height: auto;"
+  class="watermark-img"
+  loading="lazy"
+  @click="openModal(image)"
+/>
+
     </div>
   </div>
 

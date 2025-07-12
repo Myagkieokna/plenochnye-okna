@@ -9,7 +9,7 @@ export default defineNuxtConfig({
 
 
 
-  modules: ["nuxt-swiper", '@nuxt/image', "@vueuse/nuxt", "@pinia/nuxt", "nuxt-scheduler"],
+  modules: ["nuxt-swiper", "@vueuse/nuxt", "@pinia/nuxt", "nuxt-scheduler"],
   nitro: {
     preset: "static", // Или другое, если необходимо
     routeRules: {
