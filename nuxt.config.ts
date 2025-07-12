@@ -32,7 +32,7 @@ export default defineNuxtConfig({
 
   ssr: true,
 
-  modules: ["nuxt-swiper", "@nuxthub/core", "@nuxt/image", "@nuxt/ui", "@vueuse/nuxt"],
+  modules: ["nuxt-swiper", "@nuxt/image", "@nuxt/ui", "@vueuse/nuxt"],
   nitro: {
     preset: 'static', // Или другое, если необходимо
     routeRules: {
