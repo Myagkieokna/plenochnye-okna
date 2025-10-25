@@ -1,0 +1,17 @@
+1. Зайди в проект на сервере
+cd /var/www/nuxt-app
+
+2. Подтяни изменения из GitHub
+git pull origin main
+
+
+(если ветка у тебя не main, а master или другая — поменяй название).
+
+3. Установи новые зависимости (если package.json изменился)
+npm install
+
+4. Пересобери проект (SSR/production)
+npm run build
+
+5. Перезапусти процесс через PM2
+pm2 restart nuxt-app

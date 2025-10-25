@@ -1,0 +1,84 @@
+Разворачиваем Node.js-проект (Nuxt.js) на базе VDS с ОС Ubuntu Server
+https://habr.com/ru/articles/558178/#step2
+
+ПОЛНЫЙ НАБОР КОМАНД
+Помимо этих команд, 
+1. нужно настроить dns A-запись, указать ip-сервера на котором хостится в A-запись
+2. нужно настроить apache(ngnix нужен, когда докер)
+3. папку новую для файлов необязательно создавать, есть уже дефолт папка, когда мы все настроим, она появится,
+   а уже после можно туда скидывать файлы и выполнять команды по сборке проекта и его запуску и настройке автозапуска
+
+1. Перезапуск сервера
+sudo reboot
+
+2. Перезапуск Apache
+sudo systemctl restart apache2
+# Проверка статуса
+sudo systemctl status apache2
+
+3. Перезапуск PM2 процесса
+# Перезапуск конкретного приложения
+pm2 restart nuxt-app
+
+# Или перезапуск всех процессов
+pm2 restart all
+
+# Обновить переменные окружения
+pm2 restart nuxt-app --update-env
+
+# Проверка статуса
+pm2 list
+
+4. Подтягивание изменений с Git и деплой Nuxt
+cd /var/www/nuxt-app
+
+# Подтянуть изменения с Git
+git pull origin main
+
+# Установить новые зависимости (если есть)
+npm install
+
+# Пересобрать Nuxt
+npm run build
+
+# Перезапустить PM2
+pm2 restart nuxt-app
+
+5. Если удалил проект, но папка осталась
+# Очистить папку
+rm -rf /var/www/nuxt-app/*
+
+# Клонировать проект заново
+git clone https://github.com/kyxtya023/nuxt-app.git /var/www/nuxt-app
+
+cd /var/www/nuxt-app
+
+# Установить зависимости
+npm install
+
+# Собрать проект
+npm run build
+
+# Запустить через PM2
+pm2 start .output/server/index.mjs --name nuxt-app
+
+# Сохранить PM2 конфиг для автозапуска
+pm2 save
+
+6. Если удалена папка полностью
+# Клонировать проект заново
+git clone https://github.com/kyxtya023/nuxt-app.git /var/www/nuxt-app
+
+cd /var/www/nuxt-app
+
+# Установить зависимости
+npm install
+
+# Собрать проект
+npm run build
+
+# Запустить через PM2
+pm2 start .output/server/index.mjs --name nuxt-app
+
+# Сохранить PM2 конфиг для автозапуска
+pm2 save

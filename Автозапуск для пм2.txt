@@ -1,0 +1,34 @@
+Сохраняем процессы:
+
+pm2 save
+
+
+Генерируем автозапуск:
+
+pm2 startup systemd
+
+
+Он выдаст команду вроде:
+
+sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u youruser --hp /home/youruser
+
+
+Скопируй и выполни её.
+
+Перепроверь:
+
+systemctl status pm2-youruser
+
+
+Теперь после ребута сервер сам поднимет твои nuxt-процессы.
+
+✅ Apache
+
+apache2 уже установлен как systemd-сервис и в автозапуске. Проверить можно:
+
+systemctl is-enabled apache2
+
+
+Если не включён:
+
+sudo systemctl enable apache2

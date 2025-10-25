@@ -1,0 +1,31 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "start": "node .output/server/index.mjs",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@iconify/vue": "^4.1.2",
+    "@types/node-telegram-bot-api": "^0.64.7",
+    "@vueuse/nuxt": "^12.0.0",
+    "nuxt-swiper": "^2.0.0",
+    "sass": "^1.81.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.11.1",
+    "node-telegram-bot-api": "^0.66.0",
+    "nuxt": "^3.17.6",
+    "nuxt-scheduler": "^0.1.9",
+    "vue": "latest",
+    "vue-router": "latest",
+    "watermarkjs": "^2.1.1",
+    "yup": "^1.7.0"
+  }
+}
