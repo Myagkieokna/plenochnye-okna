@@ -11,6 +11,9 @@ export default defineNuxtConfig({
       HOST_NAME: process.env.HOSTNAME || "localhost",
       NODE_VERSION: process.env.NODE_VERSION,
     },
+    mailUser: process.env.MAIL_USER,
+    mailPass: process.env.MAIL_PASS,
+    mailTo: process.env.MAIL_TO,
   },
   modules: ["nuxt-swiper", "@vueuse/nuxt", "@pinia/nuxt", "nuxt-scheduler"],
   nitro: {

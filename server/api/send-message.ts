@@ -1,10 +1,5 @@
-import { defineEventHandler, sendError, createError } from "h3";
-
-// Токен бота и chatId
-const BOT_TOKEN = "8056475514:AAGyEDJqqy6IARz2qQ5CHD424mO3_5NaSqw";
-const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}`;
-// const chatId = 8180227527;
-const chatId = 6017439095;
+import { defineEventHandler, sendError, createError, readBody } from "h3";
+import nodemailer from "nodemailer";
 
 interface ContactInfo {
   name: string;
@@ -14,28 +9,24 @@ interface ContactInfo {
 
 interface Answers {
   area: string;
-  configuration: {
-    name: string;
-    title: string;
-  };
-  doorways: {
-    text: string;
-  };
-  // mosquito: string;
+  configuration: { name: string; title: string };
+  doorways: { text: string };
   installation: string;
   mount: string;
   schedule: string;
 }
 
-// Основная функция для обработки POST-запроса
 export default defineEventHandler(async (event) => {
+  const config = useRuntimeConfig(event);
+
   const { contactInfo, answers }: { contactInfo: ContactInfo; answers: Answers } = await readBody(
     event
-  ); // useBody используется здесь для получения данных
+  );
 
-  // Формируем сообщение
-  const formattedMessage = `Здравствуйте! Меня зовут ${contactInfo.name}.
-Мой номер телефона: ${contactInfo.phone}
+  const emailMessage = `
+Здравствуйте! Меня зовут ${contactInfo.name}.
+Мой номер телефона: ${contactInfo.phone}.
+Вот мои предпочтения:
 
 Площадь: ${answers.area}
 Конфигурация: ${answers.configuration.name} (${answers.configuration.title})
@@ -44,38 +35,33 @@ export default defineEventHandler(async (event) => {
 Крепление: ${answers.mount}
 График: ${answers.schedule}
 
-${contactInfo.message ? "Комментарий: " + contactInfo.message : ""}`;
-
-  if (!chatId || !formattedMessage) {
-    return sendError(
-      event,
-      createError({ statusCode: 400, message: "Необходимо указать chatId и сообщение." })
-    );
-  }
+${contactInfo.message ? `Комментарий: ${contactInfo.message}` : ""}
+`;
 
   try {
-    // Отправка сообщения через Telegram API
-    const response = await $fetch(`${TELEGRAM_API_URL}/sendMessage`, {
-      method: "POST",
-      body: {
-        chat_id: chatId,
-        text: formattedMessage,
+    const transporter = nodemailer.createTransport({
+      host: "smtp.mail.ru",
+      port: 465,
+      secure: true,
+      auth: {
+        user: config.mailUser,
+        pass: config.mailPass,
       },
     });
 
-    if (response) {
-      return { success: true, message: "Сообщение успешно отправлено!" };
-    } else {
-      console.error("Ответ от Telegram:", response);
-      throw new Error("Ошибка при отправке сообщения в Telegram");
-    }
+    await transporter.sendMail({
+      from: `"Сайт мягкие окна" <${config.mailUser}>`,
+      to: config.mailTo,
+      subject: `Новая заявка с сайта от ${contactInfo.name}`,
+      text: emailMessage,
+    });
+
+    return { success: true, message: "Заявка успешно отправлена на почту!" };
   } catch (error) {
-    console.error("Ошибка отправки сообщения в Telegram:", error);
+    console.error("Ошибка при отправке письма:", error);
     return sendError(
       event,
-      createError({ statusCode: 500, message: "Ошибка при отправке сообщения." })
+      createError({ statusCode: 500, message: "Ошибка при отправке заявки на почту." })
     );
   }
 });
-
-// - Москитные сетки: ${answers.mosquito === "yes" ? "Да" : "Нет"}
