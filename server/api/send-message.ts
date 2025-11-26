@@ -1,9 +1,10 @@
-import { defineEventHandler, sendError, createError } from 'h3';
+import { defineEventHandler, sendError, createError } from "h3";
 
 // Токен бота и chatId
-const BOT_TOKEN = '8056475514:AAGyEDJqqy6IARz2qQ5CHD424mO3_5NaSqw';
+const BOT_TOKEN = "8056475514:AAGyEDJqqy6IARz2qQ5CHD424mO3_5NaSqw";
 const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}`;
-const chatId = 8180227527;
+// const chatId = 8180227527;
+const chatId = 6017439095;
 
 interface ContactInfo {
   name: string;
@@ -28,48 +29,53 @@ interface Answers {
 
 // Основная функция для обработки POST-запроса
 export default defineEventHandler(async (event) => {
-  const { contactInfo, answers }: { contactInfo: ContactInfo; answers: Answers } = await readBody(event);  // useBody используется здесь для получения данных
+  const { contactInfo, answers }: { contactInfo: ContactInfo; answers: Answers } = await readBody(
+    event
+  ); // useBody используется здесь для получения данных
 
   // Формируем сообщение
-  const formattedMessage = `
-Здравствуйте! Меня зовут ${contactInfo.name}.
-Мой номер телефона: ${contactInfo.phone}.
-Вот мои предпочтения:
+  const formattedMessage = `Здравствуйте! Меня зовут ${contactInfo.name}.
+Мой номер телефона: ${contactInfo.phone}
 
-- Площадь: ${answers.area}
-- Конфигурация: ${answers.configuration.name} (${answers.configuration.title})
-- Количество проемов: ${answers.doorways.text}
-- Тип установки: ${answers.installation}
-- Тип крепления: ${answers.mount}
-- График: ${answers.schedule}
+Площадь: ${answers.area}
+Конфигурация: ${answers.configuration.name} (${answers.configuration.title})
+Проемы: ${answers.doorways.text}
+Установка: ${answers.installation}
+Крепление: ${answers.mount}
+График: ${answers.schedule}
 
-${contactInfo.message ? `Дополнительное сообщение: ${contactInfo.message}` : ''}
-  `;
+${contactInfo.message ? "Комментарий: " + contactInfo.message : ""}`;
 
   if (!chatId || !formattedMessage) {
-    return sendError(event, createError({ statusCode: 400, message: 'Необходимо указать chatId и сообщение.' }));
+    return sendError(
+      event,
+      createError({ statusCode: 400, message: "Необходимо указать chatId и сообщение." })
+    );
   }
 
   try {
     // Отправка сообщения через Telegram API
     const response = await $fetch(`${TELEGRAM_API_URL}/sendMessage`, {
-      method: 'POST',
+      method: "POST",
       body: {
         chat_id: chatId,
         text: formattedMessage,
-        parse_mode: 'HTML',
+        parse_mode: "HTML",
       },
     });
 
     if (response) {
-      return { success: true, message: 'Сообщение успешно отправлено!' };
+      return { success: true, message: "Сообщение успешно отправлено!" };
     } else {
-      console.error('Ответ от Telegram:', response);
-      throw new Error('Ошибка при отправке сообщения в Telegram');
+      console.error("Ответ от Telegram:", response);
+      throw new Error("Ошибка при отправке сообщения в Telegram");
     }
   } catch (error) {
-    console.error('Ошибка отправки сообщения в Telegram:', error);
-    return sendError(event, createError({ statusCode: 500, message: 'Ошибка при отправке сообщения.' }));
+    console.error("Ошибка отправки сообщения в Telegram:", error);
+    return sendError(
+      event,
+      createError({ statusCode: 500, message: "Ошибка при отправке сообщения." })
+    );
   }
 });
 

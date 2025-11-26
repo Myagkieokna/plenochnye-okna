@@ -1811,6 +1811,7 @@ const sendData = async (payload: { name: string; phone: string }) => {
     padding: 10px;
     font-size: 14px;
     border: 1px solid #393939;
+    color: #fff;
     border-radius: 5px;
     background: #212121;
   }
