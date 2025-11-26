@@ -60,7 +60,6 @@ ${contactInfo.message ? "Комментарий: " + contactInfo.message : ""}`;
       body: {
         chat_id: chatId,
         text: formattedMessage,
-        parse_mode: "HTML",
       },
     });
 

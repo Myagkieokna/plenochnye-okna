@@ -859,18 +859,18 @@ const sendData = async (payload: { name: string; phone: string }) => {
                     <div class="contact-form__form-field-block">
                       <div class="contact-form__field">
                         <label class="contact-form__label" for="name">Имя</label>
-                        <input class="contact-form__input" type="text" id="name" v-model="contactInfo.name" required />
+                        <input class="contact-form__input" style="color: #fff;" type="text" id="name" v-model="contactInfo.name" required />
                       </div>
                       <div class="contact-form__field">
                         <label class="contact-form__label" for="phone">Телефон</label>
-                        <input class="contact-form__input" type="text" id="phone" v-model="contactInfo.phone"
+                        <input class="contact-form__input" style="color: #fff;" type="text" id="phone" v-model="contactInfo.phone"
                           @input="formatPhone" placeholder="+7 (___) ___-__-__" required />
                       </div>
                     </div>
                     <div class="contact-form__field">
                       <label class="contact-form__label" for="message">Комментарий</label>
-                      <textarea class="contact-form__input contact-form__input-textarea" id="message"
-                        v-model="contactInfo.message" style="width: 100%;"></textarea>
+                      <textarea class="contact-form__input contact-form__input-textarea" style="color: #fff;" id="message"
+                        v-model="contactInfo.message"></textarea>
                     </div>
                   </form>
                 </div>
@@ -1817,6 +1817,7 @@ const sendData = async (payload: { name: string; phone: string }) => {
   }
 
   &__input-textarea {
+    color: #fff;
     height: 15rem;
     resize: none;
   }
