@@ -23,19 +23,19 @@ export default defineEventHandler(async (event) => {
     event
   );
 
-  const emailMessage = `
-Здравствуйте! Меня зовут ${contactInfo.name}.
-Мой номер телефона: ${contactInfo.phone}.
-Вот мои предпочтения:
-
-Площадь: ${answers.area}
-Конфигурация: ${answers.configuration.name} (${answers.configuration.title})
-Проемы: ${answers.doorways.text}
-Установка: ${answers.installation}
-Крепление: ${answers.mount}
-График: ${answers.schedule}
-
-${contactInfo.message ? `Комментарий: ${contactInfo.message}` : ""}
+  const emailMessageHtml = `
+<p>Здравствуйте! Меня зовут: ${contactInfo.name}.</p>
+<p>Мой номер телефона: ${contactInfo.phone}.</p>
+<p>Вот мои предпочтения:</p>
+<ul>
+<li>Площадь: ${answers.area}</li>
+<li>Конфигурация: ${answers.configuration.name} (${answers.configuration.title})</li>
+<li>Проемы: ${answers.doorways.text}</li>
+<li>Установка: ${answers.installation}</li>
+<li>Крепление: ${answers.mount}</li>
+<li>График: ${answers.schedule}</li>
+</ul>
+${contactInfo.message ? `<p>Комментарий: ${contactInfo.message}</p>` : ""}
 `;
 
   try {
@@ -53,7 +53,7 @@ ${contactInfo.message ? `Комментарий: ${contactInfo.message}` : ""}
       from: `"Сайт мягкие окна" <${config.mailUser}>`,
       to: config.mailTo,
       subject: `Новая заявка с сайта от ${contactInfo.name}`,
-      text: emailMessage,
+      html: emailMessageHtml,
     });
 
     return { success: true, message: "Заявка успешно отправлена на почту!" };
